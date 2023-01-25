@@ -27,6 +27,13 @@ app.get('/getstatecodes',function(req,res){
     })
 })
 
+app.get('/textfile',function(req,res){
+    fs.readFile("myname.txt","utf-8",(err,data)=>{
+        console.log(data);
+        res.send(data);
+    })
+});
+
 app.listen(4000,()=>{
     console.log("Port is Connected");
 })
