@@ -1,10 +1,8 @@
 const express=require('express');
-const serveindex=require('serve-index');
-const app=express();
+const http = require('http');
 
-
-app.use('/ftp',express.static('public'),serveindex('public',{icons:true}))
-
-app.listen(4000,()=>{
-    console.log('port is connected');
-})
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' })
+    res.write("Welcome Malleesh");
+    res.end();
+  }).listen(8080);
