@@ -1,10 +1,15 @@
-const http = require('http');
 
-http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' })
-    if(req.url=="/malleesh"){
-        res.send("Welcome Malleesh");
-    }
-    res.end();
+const express=require('express');
+const app=express();
+app.use(express.json());
 
-  }).listen(8080);
+app.get('/myname',function(req,res){
+    res.download('name.txt');
+})
+
+app.listen(3000,()=>{
+    console.log("J2ME Port is connected");
+})
+
+
+
