@@ -4,7 +4,7 @@ const app=express();
 app.use(express.json());
 
 app.get('/myname',function(req,res){
-    res.download('name.txt');
+    res.download('myname.txt');
 })
 
 app.listen(3000,()=>{
