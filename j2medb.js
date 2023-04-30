@@ -26,7 +26,6 @@ app.get('/gstdetails/:gstno',async function(req,res){
             arrData.push($(this).val());
         })
         text=`,${arrData[0]},${arrData[1]},${arrData[2]},${arrData[3]},${arrData[4]},${arrData[5]},${arrData[6]}`;
-        console.log(arrData)
         res.json({data:text});
     }catch(e){
         console.log(e);
