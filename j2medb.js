@@ -6,10 +6,6 @@ const app=express();
 app.use(express.json());
 app.use(cors());
 
-async function getWebData(){
-
-}
-
 app.get('/gstdetails/:gstno',async function(req,res){
     var url="https://irisgst.com/gstin-filing-detail/?gstinno="+req.params.gstno;
     try{
