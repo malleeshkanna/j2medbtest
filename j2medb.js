@@ -4,11 +4,16 @@ const express=require("express");
 const cors=require("cors");
 const app=express();
 const { Configuration, OpenAIApi } = require("openai");
+const request = require('request');
+var apiKey='';
 
-const configuration = new Configuration({
-    apiKey: "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",
-});
-const openai = new OpenAIApi(configuration);
+request({url:"https://thozhil-776ed-default-rtdb.firebaseio.com/openai.json"},(err,res)=>{
+    const data=JSON.parse(res.body);
+    console.log(data.apiKey);
+    apiKey=data.apiKey;
+})
+
+
 
 app.use(express.json());
 app.use(cors());
@@ -26,6 +31,7 @@ app.get('/gstdetails/:gstno',async function(req,res){
             arrData.push($(this).val());
         })
         text=`,${arrData[0]},${arrData[1]},${arrData[2]},${arrData[3]},${arrData[4]},${arrData[5]},${arrData[6]}`;
+        console.log(arrData)
         res.json({data:text});
     }catch(e){
         console.log(e);
@@ -33,6 +39,11 @@ app.get('/gstdetails/:gstno',async function(req,res){
 })
 
 app.get("/openaiData/:ques",async function(req,res){
+    console.log(req.params.ques);
+    const configuration = new Configuration({
+        apiKey: apiKey,
+    });
+    const openai = new OpenAIApi(configuration);
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: req.params.ques,
